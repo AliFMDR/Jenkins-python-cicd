@@ -10,7 +10,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                pip install --upgrade pip
+                python -m venv venv
+                . venv/bin/activate
                 pip install -r requirements.txt
                 '''
             }
@@ -19,6 +20,7 @@ pipeline {
         stage('Run App') {
             steps {
                 sh '''
+                . venv/bin/activate
                 python app.py
                 '''
             }

@@ -5,13 +5,19 @@ pipeline {
         }
     }
 
+    environment {
+        VENV_DIR = "venv"
+    }
+
     stages {
 
         stage('Install Dependencies') {
             steps {
                 sh '''
-                python -m venv venv
-                . venv/bin/activate
+                set -e
+                python -m venv $VENV_DIR
+                . $VENV_DIR/bin/activate
+                pip install --upgrade pip
                 pip install -r requirements.txt
                 '''
             }
@@ -20,8 +26,9 @@ pipeline {
         stage('Run App') {
             steps {
                 sh '''
-                . venv/bin/activate
-                python app.py
+                set -e
+                . $VENV_DIR/bin/activate
+                python app/app.py
                 '''
             }
         }

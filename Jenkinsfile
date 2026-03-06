@@ -9,28 +9,21 @@ pipeline {
             }
         }
 
-        stage('Install Python') {
+        stage('Check Python') {
             steps {
-                sh '''
-                apt update
-                apt install -y python3 python3-pip
-                '''
+                sh 'python3 --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh '''
-                pip3 install -r requirements.txt
-                '''
+                sh 'pip3 install -r requirements.txt'
             }
         }
 
         stage('Run App') {
             steps {
-                sh '''
-                python3 app/app.py
-                '''
+                sh 'python3 app.py'
             }
         }
 

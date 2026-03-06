@@ -3,11 +3,11 @@ pipeline {
 
     stages {
 
-        stage('Checkout Code') {
-            steps {
-                git 'https://github.com/AliFMDR/Jenkins-python-cicd.git'
-            }
-        }
+       stage('Checkout Code') {
+    steps {
+        git branch: 'main', url: 'https://github.com/AliFMDR/Jenkins-python-cicd.git'
+    }
+}
 
         stage('Check Python') {
             steps {

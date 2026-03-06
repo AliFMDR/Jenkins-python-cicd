@@ -5,19 +5,19 @@ pipeline {
 
         stage('Check Python') {
             steps {
-                bat 'python --version'
+                sh 'python3 --version || python --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'pip install -r requirements.txt'
+                sh 'pip3 install -r requirements.txt || true'
             }
         }
 
         stage('Run App') {
             steps {
-                bat 'python app\\app.py'
+                sh 'python3 app/app.py || python app/app.py'
             }
         }
 

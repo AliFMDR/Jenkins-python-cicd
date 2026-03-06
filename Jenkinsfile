@@ -6,15 +6,24 @@ pipeline {
         stage('Check Python') {
             steps {
                 sh '''
-                which python || true
-                which python3 || true
+                python3 --version || python --version
+                '''
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh '''
+                pip3 install -r requirements.txt || true
                 '''
             }
         }
 
         stage('Run App') {
             steps {
-                sh 'echo CI/CD Pipeline Success'
+                sh '''
+                nohup python3 app/app.py &
+                '''
             }
         }
 

@@ -1,21 +1,22 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.11'
-        }
-    }
+    agent any
 
     stages {
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh '''
+                python -m pip install --upgrade pip
+                pip install --user -r requirements.txt
+                '''
             }
         }
 
         stage('Run App') {
             steps {
-                sh 'python app/app.py'
+                sh '''
+                python app.py
+                '''
             }
         }
 
